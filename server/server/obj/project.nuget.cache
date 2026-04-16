@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "iSGBcEzSJs0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nehaa\\repos\\neha_every\\deploye_testing\\server\\server\\server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nehaa\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.2\\microsoft.aspnetcore.openapi.10.0.2.nupkg.sha512",
+    "C:\\Users\\nehaa\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
