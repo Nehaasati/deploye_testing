@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordMaster.UnitTests", "WordMaster.UnitTests\WordMaster.UnitTests.csproj", "{B925117F-EB20-2431-65BC-880AFF07214B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B925117F-EB20-2431-65BC-880AFF07214B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B925117F-EB20-2431-65BC-880AFF07214B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B925117F-EB20-2431-65BC-880AFF07214B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B925117F-EB20-2431-65BC-880AFF07214B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6865C7CC-ED06-4F67-B63E-1E49AB2A054E}
+	EndGlobalSection
+EndGlobal
