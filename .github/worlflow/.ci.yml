@@ -33,3 +33,4 @@ jobs:
       # Restore innan build/test så project.assets.json alltid finns.
       - name: Restore dependencies
         run: dotnet restore
+
