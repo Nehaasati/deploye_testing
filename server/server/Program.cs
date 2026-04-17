@@ -1,41 +1,37 @@
+using System.Text.Json.Serialization;
+using EverySecondLetter.Api;
+using EverySecondLetter.Services;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// ---- Config ----
+var dbSettings = Db.ResolveDatabaseSettings(
+    builder.Configuration.GetConnectionString("Default"),
+    Environment.GetEnvironmentVariable("DATABASE_URL"),
+    Environment.GetEnvironmentVariable("DB_PROVIDER"),
+    Environment.GetEnvironmentVariable("SQLITE_PATH"));
+
+builder.Services.ConfigureHttpJsonOptions(o =>
+{
+    o.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddGameDependencies(dbSettings);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+// ---- Initialize database ----
+await SeedDb.InitializeAsync(
+    app.Services.GetRequiredService<EverySecondLetter.Services.Database.IDbConnectionFactory>(),
+    dbSettings.Provider);
 
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseGameApiPipeline();
+app.MapGameEndpoints();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

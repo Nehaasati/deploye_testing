@@ -1,0 +1,20 @@
+{
+  "name": "every-second-letter-system-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bdd:gen": "bddgen",
+    "test": "npm run test:unit && npm run test:api && npm run test:ui",
+    "test:api": "newman run postman/every-second-letter-api.postman_collection.json -e postman/local.postman_environment.json --reporters cli",
+    "test:api:ci": "newman run postman/every-second-letter-api.postman_collection.json -e postman/local.postman_environment.json --reporters cli,junit --reporter-junit-export test-results/newman-api.xml",
+    "test:ui": "npm run bdd:gen && playwright test --project=ui",
+    "test:unit": "dotnet test ../UnitTests/EverySecondLetter.UnitTests/EverySecondLetter.UnitTests.csproj",
+    "test:headed": "npm run bdd:gen && playwright test --project=ui --headed",
+    "codegen": "playwright codegen http://localhost:5010"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "newman": "^6.2.1",
+    "playwright-bdd": "^8.4.1"
+  }
+}
