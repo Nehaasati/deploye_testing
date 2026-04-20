@@ -45,17 +45,17 @@ jobs:
           node-version: 24
           cache: "npm"
           cache-dependency-path: |
-            Frontend/package-lock.json
-            Testing/SystemTests/package-lock.json
+            frontend/package-lock.json
+            
 
       # Installera frontend-beroenden deterministiskt.
       - name: Install frontend dependencies
-        working-directory: Frontend
+        working-directory: frontend
         run: npm ci
 
       # Bygg frontend till Server/wwwroot (via Vite outDir-konfiguration).
       - name: Build frontend
-        working-directory: Frontend
+        working-directory: fgrontend
         run: npm run build
 
       # Publicera backend för artefakt/dokumentation (visar artifact-flöde i pipelinen).
