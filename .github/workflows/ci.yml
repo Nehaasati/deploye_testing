@@ -33,6 +33,7 @@ jobs:
       # Restore innan build/test så project.assets.json alltid finns.
       - name: Restore dependencies
         run: dotnet restore
+<<<<<<< HEAD
 
       # Kompilera backend utan ny restore (snabbare).
       - name: Build
@@ -193,3 +194,5 @@ jobs:
           echo "- Testmatris: unit/api/ui körda parallellt (UI endast på push)" >> "$GITHUB_STEP_SUMMARY"
           echo "- Nedladdade artefakter:" >> "$GITHUB_STEP_SUMMARY"
           find artifacts -type f | sed 's/^/- /' >> "$GITHUB_STEP_SUMMARY"
+=======
+>>>>>>> 393ec2519fd13f6cbdcf1b8de6aa334d9201b469
