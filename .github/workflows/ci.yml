@@ -39,10 +39,10 @@ jobs:
         run: dotnet build --no-restore
 
       # Installera Node.js och aktivera npm-cache via lockfiler.
-      - name: Use Node.js 22
+      - name: Use Node.js 24
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: "npm"
           cache-dependency-path: |
             Frontend/package-lock.json
@@ -60,7 +60,7 @@ jobs:
 
       # Publicera backend för artefakt/dokumentation (visar artifact-flöde i pipelinen).
       - name: Publish backend
-        run: dotnet publish Server/EverySecondLetter.csproj -c Release -o out --no-restore
+        run: dotnet publish Server/server.csproj -c Release -o out --no-restore
 
       # Ladda upp publish-output som artefakt.
       - name: Upload publish artifact
@@ -80,7 +80,7 @@ jobs:
       # Deploy-workflown återanvänder inte detta bygge utan triggar bara Render,
       # som gör sin egen source-based rebuild från repot vid deployment.
       - name: Validate Docker build
-        run: docker build -t every-second-letter:ci .
+        run: docker build -t deploy_testing:ci .
 
   # Job 2: Kör testsviter i matris (parallellt) och visar villkorlig körning.
   tests:
@@ -179,6 +179,7 @@ jobs:
     steps:
       # Hämta alla testartefakter från matrisjobben.
       - name: Download all test artifacts
+        if : always()
         uses: actions/download-artifact@v4
         with:
           pattern: test-results-*
