@@ -153,7 +153,7 @@ jobs:
       - name: Run UI tests
         if: ${{ matrix.suite == 'ui' }}
         run: |
-          dotnet run --project Server/EverySecondLetter.csproj --urls http://localhost:5010 &
+          dotnet run --project Server/server.csproj --urls http://localhost:5010 &
           sleep 8
           cd Testing/SystemTests
           npm run test:ui
